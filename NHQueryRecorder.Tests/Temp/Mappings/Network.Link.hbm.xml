@@ -1,0 +1,17 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Network.Link, Network, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Link`">
+    <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="LinkId" />
+      <generator class="guid.comb" />
+    </id>
+    <property name="Distance" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Distance" not-null="true" />
+    </property>
+    <many-to-one cascade="all" class="Network.Node, Network, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Parent">
+      <column name="ParentNodeId" />
+    </many-to-one>
+    <many-to-one cascade="all" class="Network.Node, Network, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Child">
+      <column name="ChildNodeId" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

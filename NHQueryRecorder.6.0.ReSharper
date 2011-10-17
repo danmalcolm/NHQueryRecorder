@@ -1,0 +1,97 @@
+<Configuration>
+  <CodeStyleSettings>
+    <ExternalPath IsNull="False">
+    </ExternalPath>
+    <Sharing>SOLUTION</Sharing>
+    <CSS>
+      <FormatSettings />
+      <Naming2 />
+    </CSS>
+    <CSharp>
+      <FormatSettings>
+        <ALIGN_MULTILINE_ARRAY_AND_OBJECT_INITIALIZER>False</ALIGN_MULTILINE_ARRAY_AND_OBJECT_INITIALIZER>
+        <ANONYMOUS_METHOD_DECLARATION_BRACES>NEXT_LINE</ANONYMOUS_METHOD_DECLARATION_BRACES>
+        <CASE_BLOCK_BRACES>NEXT_LINE</CASE_BLOCK_BRACES>
+        <INDENT_ANONYMOUS_METHOD_BLOCK>False</INDENT_ANONYMOUS_METHOD_BLOCK>
+        <INDENT_EMBRACED_INITIALIZER_BLOCK>False</INDENT_EMBRACED_INITIALIZER_BLOCK>
+        <INITIALIZER_BRACES>NEXT_LINE</INITIALIZER_BRACES>
+        <MODIFIERS_ORDER IsNull="False">
+          <Item>public</Item>
+          <Item>protected</Item>
+          <Item>internal</Item>
+          <Item>private</Item>
+          <Item>new</Item>
+          <Item>abstract</Item>
+          <Item>virtual</Item>
+          <Item>override</Item>
+          <Item>sealed</Item>
+          <Item>static</Item>
+          <Item>readonly</Item>
+          <Item>extern</Item>
+          <Item>unsafe</Item>
+          <Item>volatile</Item>
+        </MODIFIERS_ORDER>
+        <WRAP_BEFORE_DECLARATION_LPAR>True</WRAP_BEFORE_DECLARATION_LPAR>
+        <WRAP_FOR_STMT_HEADER_STYLE>WRAP_IF_LONG</WRAP_FOR_STMT_HEADER_STYLE>
+        <WRAP_MULTIPLE_DECLARATION_STYLE>WRAP_IF_LONG</WRAP_MULTIPLE_DECLARATION_STYLE>
+        <WRAP_MULTIPLE_TYPE_PARAMEER_CONSTRAINTS_STYLE>WRAP_IF_LONG</WRAP_MULTIPLE_TYPE_PARAMEER_CONSTRAINTS_STYLE>
+        <WRAP_OBJECT_AND_COLLECTION_INITIALIZER_STYLE>WRAP_IF_LONG</WRAP_OBJECT_AND_COLLECTION_INITIALIZER_STYLE>
+        <WRAP_TERNARY_EXPR_STYLE>WRAP_IF_LONG</WRAP_TERNARY_EXPR_STYLE>
+      </FormatSettings>
+      <UsingsSettings />
+      <Naming2>
+        <EventHandlerPatternLong>$object$_On$event$</EventHandlerPatternLong>
+        <EventHandlerPatternShort>$event$Handler</EventHandlerPatternShort>
+      </Naming2>
+    </CSharp>
+    <HTML>
+      <FormatSettings />
+    </HTML>
+    <JavaScript>
+      <FormatSettings />
+      <Naming2 />
+    </JavaScript>
+    <VB>
+      <FormatSettings />
+      <ImportsSettings />
+      <Naming2>
+        <EventHandlerPatternLong>$object$_On$event$</EventHandlerPatternLong>
+        <EventHandlerPatternShort>$event$Handler</EventHandlerPatternShort>
+      </Naming2>
+    </VB>
+    <Web>
+      <Naming2 />
+    </Web>
+    <XML>
+      <FormatSettings />
+    </XML>
+    <Xaml>
+      <Naming2 />
+    </Xaml>
+    <GenerateMemberBody />
+    <Naming2>
+      <EventHandlerPatternLong>$object$_On$event$</EventHandlerPatternLong>
+      <EventHandlerPatternShort>$event$Handler</EventHandlerPatternShort>
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="Parameters" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="TypesAndNamespaces">
+        <ExtraRule Prefix="" Suffix="" Style="aa_bb" />
+      </PredefinedRule>
+      <PredefinedRule Inspect="True" Prefix="I" Suffix="" Style="AaBb" ElementKind="Interfaces" />
+      <PredefinedRule Inspect="True" Prefix="T" Suffix="" Style="AaBb" ElementKind="TypeParameters" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="MethodPropertyEvent">
+        <ExtraRule Prefix="" Suffix="" Style="aa_bb" />
+      </PredefinedRule>
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="Locals" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="LocalConstants" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="PublicFields" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="PrivateInstanceFields" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="PrivateStaticFields" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Constants" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="PrivateConstants" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="StaticReadonly" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="PrivateStaticReadonly" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="EnumMember" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Other" />
+    </Naming2>
+  </CodeStyleSettings>
+</Configuration>

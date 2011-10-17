@@ -1,0 +1,22 @@
+2011-07-04 19:26:08,681 [1] WARN  Rhino.Licensing.LicenseValidator [(null)] - Could not find license file: C:\Users\Dan\AppData\Local\NHibernate Profiler\license.xml
+2011-07-04 22:38:42,013 [1] WARN  Rhino.Licensing.LicenseValidator [(null)] - Could not find license file: C:\Users\Dan\AppData\Local\NHibernate Profiler\license.xml
+2011-07-04 22:40:47,836 [1] INFO  Rhino.Licensing.LicenseValidator [(null)] - License expiration date is 08/05/2011 18:27:24
+2011-07-04 22:40:47,983 [1] DEBUG Rhino.Licensing.LicenseValidator [(null)] - License accepted for NHibernate Profiler
+2011-07-04 22:40:48,272 [1] INFO  Rhino.Licensing.LicenseValidator [(null)] - License expiration date is 08/05/2011 18:27:24
+2011-07-04 22:40:48,377 [1] DEBUG Rhino.Licensing.LicenseValidator [(null)] - License accepted for NHibernate Profiler
+2011-07-04 22:40:53,347 [4] INFO  HibernatingRhinos.Profiler.Client.App [(null)] - Checking for updates...
+2011-07-04 22:40:54,224 [4] ERROR HibernatingRhinos.Profiler.Client.App [(null)] - Error while checking for updates: System.NullReferenceException: Object reference not set to an instance of an object.
+   at NAppUpdate.Framework.UpdateManager.CheckForUpdates(IUpdateSource source, Action`1 callback)
+   at NAppUpdate.Framework.UpdateManager.<>c__DisplayClass2.<CheckForUpdateAsync>b__1()
+2011-07-04 22:45:48,283 [14] INFO  Rhino.Licensing.LicenseValidator [(null)] - License expiration date is 08/05/2011 18:27:24
+2011-07-04 22:50:48,287 [10] INFO  Rhino.Licensing.LicenseValidator [(null)] - License expiration date is 08/05/2011 18:27:24
+2011-07-04 22:55:48,291 [9] INFO  Rhino.Licensing.LicenseValidator [(null)] - License expiration date is 08/05/2011 18:27:24
+2011-07-05 10:50:08,715 [1] INFO  Rhino.Licensing.LicenseValidator [(null)] - License expiration date is 12/31/9999 23:59:59
+2011-07-05 10:50:08,907 [1] DEBUG Rhino.Licensing.LicenseValidator [(null)] - License accepted for NHibernate Profiler
+2011-07-05 10:50:10,558 [4] INFO  HibernatingRhinos.Profiler.Client.App [(null)] - Checking for updates...
+2011-07-05 10:50:11,696 [4] ERROR HibernatingRhinos.Profiler.Client.App [(null)] - Error while checking for updates: System.NullReferenceException: Object reference not set to an instance of an object.
+   at NAppUpdate.Framework.UpdateManager.CheckForUpdates(IUpdateSource source, Action`1 callback)
+   at NAppUpdate.Framework.UpdateManager.<>c__DisplayClass2.<CheckForUpdateAsync>b__1()
+2011-07-05 10:55:08,778 [14] INFO  Rhino.Licensing.LicenseValidator [(null)] - License expiration date is 12/31/9999 23:59:59
+2011-07-05 11:00:08,793 [6] INFO  Rhino.Licensing.LicenseValidator [(null)] - License expiration date is 12/31/9999 23:59:59
+2011-07-05 11:05:08,810 [17] INFO  Rhino.Licensing.LicenseValidator [(null)] - License expiration date is 12/31/9999 23:59:59
