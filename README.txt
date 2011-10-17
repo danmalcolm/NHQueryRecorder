@@ -17,13 +17,13 @@ LIMITATIONS
 There are a few (after 7h dev). This is at proof of concept stage and is not recommended for production use.
 Supports Sql Server only (only tested against Sql2008 dialect)
 Use file for SqlCommandProcessor tests, e.g. table with expected output for each dialect
-Dodgy regexes: An insert statement updating a string field to the value of an NHibernate log message would cause a mess
+Dodgy regexes: An statement inserting or updating a string column with the value of an NHibernate log message would cause a mess
 Dates param values are only logged to second precision
 
 TODO
 
 Replace Regex with parser - Sprache
-Or improve Regexes ('' in string param values and values like [Type or @p0 might trip it up at the moment). 
+Or improve Regexes (balanced quotes etc)
 Support more dialects
 Build script
 
