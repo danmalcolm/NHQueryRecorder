@@ -1,7 +1,8 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Sprache;
 
-namespace NHQueryRecorder
+namespace NHQueryRecorder.Parsing
 {
     public class CommandSplitter
     {
@@ -25,5 +26,11 @@ namespace NHQueryRecorder
                 return RegexUtility.GetCapturedValuesInGroup(match, "command").Select(x => x.Trim()).ToArray();
             }
         }
+
+		public static string[] GetIndividualCommands2(string logMessage)
+		{
+			var result = BatchedCommandParser.BatchedLog.Parse(logMessage);
+			return result.Select(x => string.Concat(x)).ToArray();
+		}
     }
 }

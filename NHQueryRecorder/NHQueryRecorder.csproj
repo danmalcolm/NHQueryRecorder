@@ -46,6 +46,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NHibernate.3.2.0.2002\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="Sprache">
+      <HintPath>..\packages\Sprache.1.9.1.31\lib\NET40\Sprache.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,8 +58,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandSplitter.cs" />
     <Compile Include="LogSpy.cs" />
+    <Compile Include="Parsing\BatchedCommandParser.cs" />
+    <Compile Include="Parsing\Command.cs" />
+    <Compile Include="Parsing\CommandSplitter.cs" />
     <Compile Include="RecordedCommand.cs" />
     <Compile Include="Recording.cs" />
     <Compile Include="RegexUtility.cs" />
