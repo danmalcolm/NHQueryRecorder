@@ -26,7 +26,7 @@ namespace NHQueryRecorder
             var match = CommandRegex.Match(logMessage);
             if (!match.Success)
             {
-            	throw new UnexpectedSqlFormatException("Unrecognised sql format. Please review reasons why this might have changed.", logMessage);
+            	throw new UnexpectedSqlFormatException("The format of the SQL log message was not in the expected format. Please review reasons why this might have changed.", logMessage);
             }
 
             string command = match.Groups["command"].Value;

@@ -15,7 +15,6 @@ All developers work against databases on a local SQL Server instance, which they
 LIMITATIONS
 
 There are a few! This is at proof of concept stage and is not recommended for production use.
-Dodgy regexes! A statement inserting or updating a string column with the value of an NHibernate log message would cause a mess
 Supports Sql Server only (only tested against Sql2008 dialect)
 Date param values are only logged to second precision
 
@@ -23,7 +22,6 @@ Date param values are only logged to second precision
 TODO
 
 Replace Regex with parser - Sprache
-Or improve Regexes (balanced quotes etc)
 Support more dialects
 Build script
 Use file for SqlCommandProcessor tests, e.g. table with expected output for each dialect
@@ -32,3 +30,8 @@ Use file for SqlCommandProcessor tests, e.g. table with expected output for each
 ALTERNATIVES
 
 NHProfiler records SQL and generates executable SQL, which you can copy / paste. I think you can automate it also. 
+
+
+LICENSE
+
+NHQueryRecorder is ©2011 Dan Malcolm and contributors under the BSD license. See TODO link.
