@@ -1,7 +1,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace NHQueryRecorder.Tests
+namespace NHQueryRecorder.Tests.CommandSplitterSpecs
 {
     public class when_splitting_batch_command : ContextSpecification
     {

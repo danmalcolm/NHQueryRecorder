@@ -1,3 +1,4 @@
+using System;
 using log4net.Config;
 using NUnit.Framework;
 
@@ -8,10 +9,12 @@ namespace NHQueryRecorder.Tests
 	/// </summary>
 	public class ContextSpecification
     {
+        private static bool log4NetConfigured;
+
         [TestFixtureSetUp]
-		protected void TestFixtureSetUp()
+        protected void TestFixtureSetUp()
 		{
-            SetupSpecification();
+		    SetupSpecification();
 		}
 
 	    [TestFixtureTearDown]
@@ -22,14 +25,23 @@ namespace NHQueryRecorder.Tests
 
 	    private void SetupSpecification()
 		{
-	        BasicConfigurator.Configure();
+            ConfigureLog4Net();
 			before_set_up_context();
 			set_up_context();
 			after_set_up_context();
 			because();
 		}
 
-	    private void TearDownSpecification()
+        private static void ConfigureLog4Net()
+        {
+            if(!log4NetConfigured)
+            {
+                BasicConfigurator.Configure();
+                log4NetConfigured = true;
+            } 
+        }
+
+        private void TearDownSpecification()
 	    {
 	        clean_up_context();
 	    }
