@@ -42,6 +42,15 @@ command 0:INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProp
                                         @"INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES ('Mike''s Thing 1', 1, '2007-07-01T07:07:07', 1, 1.77, '1ceb77e3-3f2e-42b0-a4ba-9f7f01735739');")
 		        ;
 
+            yield return CreateTestCase("Batched Single Insert Statement with string containing an NHibernate.SQL log",
+                                        @"Batch commands:
+command 0:INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES (@p0, @p1, @p2, @p3, @p4, @p5);@p0 = 'Batch commands:
+command 0:INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES (@p0, @p1, @p2, @p3, @p4, @p5);@p0 = ''Mike''''s Thing 1'' [Type: String (50)], @p1 = True [Type: Boolean (0)], @p2 = 01/07/2007 07:07:07 [Type: DateTime (0)], @p3 = 1 [Type: Int32 (0)], @p4 = 1.77 [Type: Decimal (0)], @p5 = 1ceb77e3-3f2e-42b0-a4ba-9f7f01735739 [Type: Guid (0)]' [Type: String (50)], @p1 = True [Type: Boolean (0)], @p2 = 01/07/2007 07:07:07 [Type: DateTime (0)], @p3 = 1 [Type: Int32 (0)], @p4 = 1.77 [Type: Decimal (0)], @p5 = 1ceb77e3-3f2e-42b0-a4ba-9f7f01735739 [Type: Guid (0)]
+",
+                                        @"INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES ('Batch commands:
+command 0:INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES (@p0, @p1, @p2, @p3, @p4, @p5);@p0 = ''Mike''''s Thing 1'' [Type: String (50)], @p1 = True [Type: Boolean (0)], @p2 = 01/07/2007 07:07:07 [Type: DateTime (0)], @p3 = 1 [Type: Int32 (0)], @p4 = 1.77 [Type: Decimal (0)], @p5 = 1ceb77e3-3f2e-42b0-a4ba-9f7f01735739 [Type: Guid (0)]', 1, '2007-07-01T07:07:07', 1, 1.77, '1ceb77e3-3f2e-42b0-a4ba-9f7f01735739');")
+                ;
+
             yield return CreateTestCase("Batched Single Insert Statement with string containing param symbols",
                                        @"Batch commands:
 command 0:INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES (@p0, @p1, @p2, @p3, @p4, @p5);@p0 = 'Mike @p1 Thing' [Type: String (50)], @p1 = True [Type: Boolean (0)], @p2 = 01/07/2007 07:07:07 [Type: DateTime (0)], @p3 = 1 [Type: Int32 (0)], @p4 = 1.77 [Type: Decimal (0)], @p5 = 1ceb77e3-3f2e-42b0-a4ba-9f7f01735739 [Type: Guid (0)]

@@ -7,7 +7,7 @@ namespace NHQueryRecorder
 	/// </summary>
 	public class UnexpectedSqlFormatException : Exception
 	{
-		public UnexpectedSqlFormatException(string message, string command) : base(message)
+		public UnexpectedSqlFormatException(string message, string command) : base(message + Environment.NewLine + "Command:" + Environment.NewLine + command)
 		{
 			Command = command;
 		}
