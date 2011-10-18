@@ -20,6 +20,19 @@ command 0:INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProp
 ",
 			                            @"INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES ('Thing 1', 1, '2007-07-01T07:07:07', 1, 1.77, '1ceb77e3-3f2e-42b0-a4ba-9f7f01735739');")
 				;
+            yield return CreateTestCase("Batched Insert Statement With Nulls",
+                                        @"Batch commands:
+command 0:INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES (@p0, @p1, @p2, @p3, @p4, @p5);@p0 = NULL [Type: String (50)], @p1 = NULL [Type: Boolean (0)], @p2 = NULL [Type: DateTime (0)], @p3 = NULL [Type: Int32 (0)], @p4 = NULL [Type: Decimal (0)], @p5 = 1ceb77e3-3f2e-42b0-a4ba-9f7f01735739 [Type: Guid (0)]
+",
+                                        @"INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES (NULL, NULL, NULL, NULL, NULL, '1ceb77e3-3f2e-42b0-a4ba-9f7f01735739');")
+                ;
+
+            yield return CreateTestCase("Batched Insert Statement With Quoted NULL string",
+                                        @"Batch commands:
+command 0:INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES (@p0, @p1, @p2, @p3, @p4, @p5);@p0 = 'NULL' [Type: String (50)], @p1 = NULL [Type: Boolean (0)], @p2 = NULL [Type: DateTime (0)], @p3 = NULL [Type: Int32 (0)], @p4 = NULL [Type: Decimal (0)], @p5 = 1ceb77e3-3f2e-42b0-a4ba-9f7f01735739 [Type: Guid (0)]
+",
+                                        @"INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES ('NULL', NULL, NULL, NULL, NULL, '1ceb77e3-3f2e-42b0-a4ba-9f7f01735739');")
+                ;
 
 			yield return CreateTestCase("Batched Multiple Insert Statements",
 			                            @"Batch commands:

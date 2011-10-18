@@ -8,7 +8,7 @@ namespace NHQueryRecorder
 {
     public class SqlCommandProcessor
     {
-		const string CommandRegexPattern = "(?<command>[^;]+;?)(?<params>(?<param>@p(?<paramIndex>\\d+)\\s+=\\s+(('(?<paramValue>[^']+)')|(?<paramValue>.+?))\\s+\\[Type:\\s+(?<paramType>\\w+)\\s+\\((?<paramLength>\\w+)\\)\\s*](,\\s+)?)*).*";
+        const string CommandRegexPattern = "(?<command>[^;]+;?)(?<params>(?<param>@p(?<paramIndex>\\d+)\\s+=\\s+(?<paramValue>('[^']+')|(.+?))\\s+\\[Type:\\s+(?<paramType>\\w+)\\s+\\((?<paramLength>\\w+)\\)\\s*](,\\s+)?)*).*";
 		private static readonly Regex CommandRegex = new Regex(CommandRegexPattern, RegexOptions.Compiled);
 
 		const string ParamPlaceholderRegexPattern = "@p(?<index>\\d+)";
@@ -52,7 +52,7 @@ namespace NHQueryRecorder
         private Dictionary<int,ParameterData> GetParameters(Match match)
         {
             var indexes = RegexUtility.GetCapturedValuesInGroup(match, "paramIndex");
-            var values = RegexUtility.GetCapturedValuesInGroup(match, "paramValue");
+            var values = RegexUtility.GetCapturedValuesInGroup(match, "paramValue").Select(ConvertValueToNullOrRemoveQuotes).ToArray();
             var types = RegexUtility.GetCapturedValuesInGroup(match, "paramType");
             var lengths = RegexUtility.GetCapturedValuesInGroup(match, "paramLength");
             var parameters = from i in Enumerable.Range(0, indexes.Length)
@@ -63,7 +63,22 @@ namespace NHQueryRecorder
                              select new ParameterData (index, type, length, value);
             return parameters.ToDictionary(x => x.Index);
         }
-		
+
+        private string ConvertValueToNullOrRemoveQuotes(string value)
+        {
+            // Just strip quotes - makes sure we don't record 'NULL' as null
+            if (value == null || value == "NULL")
+            {
+                // non-enquoted NULL value, means it's legitimate db null
+                return null;
+            }
+            else
+            {
+                var regex = new Regex("^'|'$");
+                return regex.Replace(value, "");
+            }
+        }
+
 		private class ParameterData
         {
             public ParameterData(int index, string type, int length, string value)
@@ -71,6 +86,8 @@ namespace NHQueryRecorder
                 Index = index;
                 Type = type;
                 Length = length;
+                
+                
                 Value = value;
             }
 
@@ -84,6 +101,10 @@ namespace NHQueryRecorder
             {
                 get
                 {
+                    if(Value == null)
+                    {
+                        return "NULL";
+                    }
                     switch (Type.ToLowerInvariant())
                     {
                         case "datetime":
