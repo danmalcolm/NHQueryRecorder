@@ -8,7 +8,7 @@ namespace NHQueryRecorder
 {
     public class SqlCommandProcessor
     {
-        const string CommandRegexPattern = "(?<command>[^;]+;?)(?<params>(?<param>@p(?<paramIndex>\\d+)\\s+=\\s+(?<paramValue>('[^']+')|(.+?))\\s+\\[Type:\\s+(?<paramType>\\w+)\\s+\\((?<paramLength>\\w+)\\)\\s*](,\\s+)?)*).*";
+        const string CommandRegexPattern = "(?<command>[^;]+;?)(?<params>(?<param>@p(?<paramIndex>\\d+)\\s+=\\s+(?<paramValue>(.+?))\\s+\\[Type:\\s+(?<paramType>\\w+)\\s+\\((?<paramLength>\\d+)\\)\\s*]((,\\s+)?)|$)+)|\\s*$";
 		private static readonly Regex CommandRegex = new Regex(CommandRegexPattern, RegexOptions.Compiled);
 
 		const string ParamPlaceholderRegexPattern = "@p(?<index>\\d+)";
