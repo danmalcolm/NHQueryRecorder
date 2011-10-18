@@ -34,4 +34,4 @@ NHProfiler records SQL and generates executable SQL, which you can copy / paste.
 
 LICENSE
 
-NHQueryRecorder is ©2011 Dan Malcolm and contributors under the BSD license. See TODO link.
+NHQueryRecorder is ©2011 Dan Malcolm and contributors under the BSD license. See https://github.com/danmalcolm/NHQueryRecorder/blob/master/LICENCE.txt.
