@@ -45,7 +45,7 @@ command 4:INSERT INTO Node (NodeName, NodeId) VALUES (@p0, @p1);@p0 = 'E' [Type:
         
     }
 
-     public class when_splitting_batch_command_containing_single_command_with_log_message_as_value_of_string_parameter : ContextSpecification
+    public class when_splitting_batch_command_containing_single_command_with_log_message_as_value_of_string_parameter : ContextSpecification
     {
         private string[] commands;
          private string loggedSql;
@@ -62,7 +62,7 @@ command 0:INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProp
         [Test]
         public void should_create_single_command()
         {
-            CollectionAssert.AreEquivalent(new[] { loggedSql}, commands);
+            Assert.AreEqual(1, commands.Length);
         }
 
         [Test]

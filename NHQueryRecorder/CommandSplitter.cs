@@ -6,14 +6,22 @@ namespace NHQueryRecorder
     public class CommandSplitter
     {
         /// <summary>
-        /// Returns seprate strings for each command if log message contains SQL for a batched command, or the entire
+        /// Returns seprate strings for each command if log message contains batched commands, or the entire
         /// command if it is not a batch command
         /// </summary>
         /// <param name="logMessage"></param>
         /// <returns></returns>
         public static string[] GetIndividualCommands(string logMessage)
         {
-            string pattern = "^Batch\\s+commands:\\s+((command\\s+\\d+:(?<command>.*((\\r\\n)|$))))+";
+            const string pattern = @"^Batch\s+commands:\s+
+(?<command>(?<=\r\n)command\s+\d+: # 'command N' heading at start of line
+(?<commandsql>
+	(?:
+		(?:[^']) # Any char except quote
+        |
+        (?:'(?:[^']|(?:''))*') # Quoted sequence of chars or escaped quotes (''). This prevents us from matching 'command N' if it happens to be within quotes
+	)+?) # Match as few as possible so we don't gobble up the start of the next command group
+)*$";
             var regex = new Regex(pattern, RegexOptions.IgnorePatternWhitespace);
             var match = regex.Match(logMessage);
             if(!match.Success)
@@ -22,7 +30,7 @@ namespace NHQueryRecorder
             }
             else
             {
-                return RegexUtility.GetCapturedValuesInGroup(match, "command").Select(x => x.Trim()).ToArray();
+                return RegexUtility.GetCapturedValuesInGroup(match, "commandsql").Select(x => x.Trim()).ToArray();
             }
         }
     }

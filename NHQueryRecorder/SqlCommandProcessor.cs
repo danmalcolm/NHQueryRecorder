@@ -16,7 +16,8 @@ namespace NHQueryRecorder
 
         public string CreateExecutableSql(string loggedSql)
         {
-            var commands = (from message in CommandSplitter.GetIndividualCommands(loggedSql)
+            var loggedCommands = CommandSplitter.GetIndividualCommands(loggedSql);
+            var commands = (from message in loggedCommands
                    select ConvertIndividualCommand(message)).ToArray();
             return string.Join(Environment.NewLine, commands);
         }
