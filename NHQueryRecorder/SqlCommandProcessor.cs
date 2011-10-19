@@ -8,8 +8,34 @@ namespace NHQueryRecorder
 {
     public class SqlCommandProcessor
     {
-        const string CommandRegexPattern = "(?<command>[^;]+;?)(?<params>(?<param>@p(?<paramIndex>\\d+)\\s+=\\s+(?<paramValue>(.+?))\\s+\\[Type:\\s+(?<paramType>\\w+)\\s+\\((?<paramLength>\\d+)\\)\\s*]((,\\s+)?)|$)+)|\\s*$";
-		private static readonly Regex CommandRegex = new Regex(CommandRegexPattern, RegexOptions.Compiled);
+        const string CommandRegexPattern = @"^
+(?<command>
+	(?:
+		(?:[^';]) # Any char except quote or command terminator
+        |
+        	(?:'(?:[^']|(?:''))*') # Quoted sequence of chars or escaped quotes (''). This prevents us from matching on things we are looking for if they are in quotes
+	)*;?
+)
+(?<params>
+	(?: 
+		# Parameter, e.g. @p3 = 1 [Type: Int32 (0)]
+		(?<param>@p(?<paramIndex>\d+)\s+=\s*
+			(?<paramValue>
+				(?:
+                    # Any char except quote or [
+					(?:(?:[^'\[]))+ 
+	        		|
+                    # Quoted sequence of chars or escaped quotes (''). This prevents us from matching on next parts we are looking for if they are in quotes
+	        		(?:'(?:[^']|(?:''))*') 
+				)
+			)
+			\s\[Type:\s+(?<paramType>\w+)\s+\((?<paramLength>\d+)\)]			
+		)
+		# Separator between parameters
+		(?:,\s*)?
+	)*
+)";
+		private static readonly Regex CommandRegex = new Regex(CommandRegexPattern, RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace);
 
 		const string ParamPlaceholderRegexPattern = "@p(?<index>\\d+)";
 		private static readonly Regex ParamPlaceholderRegex = new Regex(ParamPlaceholderRegexPattern);
