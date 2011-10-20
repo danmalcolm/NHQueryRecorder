@@ -38,6 +38,7 @@ Replace Regex with parser - Sprache
 Support more dialects
 Build script
 Use file for SqlCommandProcessor tests, e.g. table with expected output for each dialect
+NuGet package
 
 
 ALTERNATIVES

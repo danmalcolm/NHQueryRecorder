@@ -9,11 +9,14 @@ namespace NHQueryRecorder
     public class SqlCommandProcessor
     {
         const string CommandRegexPattern = @"^
+# The actual insert, update, select etc
 (?<command>
 	(?:
-		(?:[^';]) # Any char except quote or command terminator
+         # Any char except quote or command terminator
+		(?:[^';])
         |
-        	(?:'(?:[^']|(?:''))*') # Quoted sequence of chars or escaped quotes (''). This prevents us from matching on things we are looking for if they are in quotes
+        # Quoted sequence of chars or escaped quotes (''). This prevents us from matching on things expected further on if they are in quotes
+        (?:'(?:[^']|(?:''))*')
 	)*;?
 )
 (?<params>
