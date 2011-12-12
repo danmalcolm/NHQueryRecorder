@@ -46,13 +46,7 @@ namespace NHQueryRecorder.Tests.SqlCommandRecorderSpecs
 			Assert.That(Regex.Matches(command.LoggedSql, "INSERT\\s+(INTO\\s+)?Thing").Count, Is.EqualTo(5));
 		}
 
-		[Test]
-		public void recorded_command_should_include_executable_version_of_sql_logged_by_nhibernate()
-		{
-			var command = Recording.Commands.Single();
-			string executableSql = new SqlCommandProcessor().CreateExecutableSql(command.LoggedSql);
-			Assert.AreEqual(executableSql, command.ExecutableSql);
-		}
+		
     }
 
 	public class when_recording_single_insert : shared_context
@@ -75,14 +69,6 @@ namespace NHQueryRecorder.Tests.SqlCommandRecorderSpecs
 			var command = Recording.Commands.Single();
 			// very primitive check to ensure sql from log is in place
 			Assert.That(Regex.Matches(command.LoggedSql, "INSERT\\s+(INTO\\s+)?Thing").Count, Is.EqualTo(1));
-		}
-
-		[Test]
-		public void recorded_command_should_include_executable_version_of_sql_logged_by_nhibernate()
-		{
-			var command = Recording.Commands.Single();
-			string executableSql = new SqlCommandProcessor().CreateExecutableSql(command.LoggedSql);
-			Assert.AreEqual(executableSql, command.ExecutableSql);
 		}
 	}
 
@@ -112,13 +98,6 @@ namespace NHQueryRecorder.Tests.SqlCommandRecorderSpecs
 			Assert.That(Regex.Matches(command.LoggedSql, "UPDATE\\s+Thing").Count, Is.EqualTo(1));
 		}
 
-		[Test]
-		public void recorded_command_should_include_executable_version_of_sql_logged_by_nhibernate()
-		{
-			var command = Recording.Commands.Single();
-			string executableSql = new SqlCommandProcessor().CreateExecutableSql(command.LoggedSql);
-			Assert.AreEqual(executableSql, command.ExecutableSql);
-		}
 	}
 
 	public class when_recording_select_all : shared_context
@@ -145,12 +124,5 @@ namespace NHQueryRecorder.Tests.SqlCommandRecorderSpecs
 			Assert.That(Regex.Matches(command.LoggedSql, "SELECT", RegexOptions.IgnoreCase).Count, Is.EqualTo(1));
 		}
 
-		[Test]
-		public void recorded_command_should_include_executable_version_of_sql_logged_by_nhibernate()
-		{
-			var command = Recording.Commands.Single();
-			string executableSql = new SqlCommandProcessor().CreateExecutableSql(command.LoggedSql);
-			Assert.AreEqual(executableSql, command.ExecutableSql);
-		}
 	}
 }

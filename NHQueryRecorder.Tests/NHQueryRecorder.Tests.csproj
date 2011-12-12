@@ -77,7 +77,7 @@
     <Compile Include="CommandSplitterSpecs.cs" />
     <Compile Include="ContextSpecification.cs" />
     <Compile Include="PersistenceSpecification.cs" />
-    <Compile Include="SqlCommandProcessorSpecs.cs" />
+    <Compile Include="LogMessageProcessorSpecs.cs" />
     <Compile Include="SqlCommandRecorderSpecs.cs" />
     <Compile Include="TestModelPersistenceSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

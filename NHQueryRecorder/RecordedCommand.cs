@@ -1,23 +1,30 @@
+using System;
+
 namespace NHQueryRecorder
 {
     public class RecordedCommand
     {
-        public RecordedCommand(string loggedSql, string executableSql)
+        public RecordedCommand(string loggedSql, string[] executableCommands)
         {
             LoggedSql = loggedSql;
-            ExecutableSql = executableSql;
+        	ExecutableCommands = executableCommands;
         }
 
         /// <summary>
-        /// The SQL statement as logged by NHibernate
+        /// The SQL statements as logged by NHibernate
         /// </summary>
         public string LoggedSql { get; private set; }
 
-        /// <summary>
+		/// <summary>
+		/// One or more commands
+		/// </summary>
+    	public string[] ExecutableCommands { get; private set; }
+
+    	/// <summary>
         /// The SQL statement with parameter values parsed from the originally logged statement and inserted into the 
         /// original statement, suitable for executing against the database
         /// </summary>
-        public string ExecutableSql { get; private set; }
+		public string ExecutableSql { get { return string.Join(Environment.NewLine, ExecutableCommands); } }
 
         public override string ToString()
         {

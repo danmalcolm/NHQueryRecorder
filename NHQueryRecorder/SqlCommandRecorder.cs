@@ -22,11 +22,11 @@ namespace NHQueryRecorder
         /// <returns></returns>
         public Recording GetRecording()
         {
-            var processor = new SqlCommandProcessor();
+            var processor = new LogMessageProcessor();
             var commands = from e in spy.Appender.GetEvents()
                    let loggedSql = e.RenderedMessage
-                   let executableSql = processor.CreateExecutableSql(e.RenderedMessage)
-                   select new RecordedCommand(loggedSql, executableSql);
+				   let command = processor.ProcessCommand(loggedSql)
+                   select command;
             return new Recording(commands);
         }
 
