@@ -28,12 +28,12 @@ namespace NHQueryRecorder
 			# Parameter, e.g. @p3 = 1 [Type: Int32 (0)]
 			(?<param>@p(?<paramIndex>\d+)\s+=\s*
 				(?<paramValue>
-					# Any sequence of chars except quote or [
+					# Unquoted value: everything up to the next [
 					[^'\[]+ 
 	        		|
-			        # Quoted sequence of chars. Note that the sequence can include single quotes, as NH log output for 
-					# string param values does not escape the quotes, so we can't do anything cleverer than this, we really can't.
-					# Note use of Singleline option to allow the dot to match new lines 
+			        # Or quoted sequence of chars. Note NH log output for string param values does not escape single quotes.
+					# We really can't do any better than match .* and rely on the overall structure of the pattern to identify
+					# the closing quote. Note use of Singleline option to allow the dot to match new lines
 	        		'.*?' 
 				)
 				\s\[Type:\s+(?<paramType>\w+)\s+\((?<paramLength>\d+)\)]			
