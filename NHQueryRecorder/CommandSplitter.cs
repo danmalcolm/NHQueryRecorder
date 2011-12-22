@@ -6,7 +6,7 @@ namespace NHQueryRecorder
     public class CommandSplitter
     {
         /// <summary>
-        /// Returns seprate strings for each command if log message contains batched commands, or the entire
+        /// Returns separate strings for each command if log message contains batched commands, or the entire
         /// command if it is not a batch command
         /// </summary>
         /// <param name="logMessage"></param>

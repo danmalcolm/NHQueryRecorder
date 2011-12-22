@@ -21,15 +21,32 @@ namespace NHQueryRecorder
 
         public IList<RecordedCommand> Commands { get; private set; }
 
-        public string GetAllCommandsExecutableSql()
+		/// <param name="batchSize">Specifies how frequently a GO separator will be inserted between the commands</param>
+        public string GetAllCommandsExecutableSql(int batchSize = 0)
         {
+        	var commands = Commands.Select(x => x.ExecutableSql);
+			if(batchSize > 0)
+			{
+				commands = commands.SelectMany((command, index) =>
+        	    {
+					if(batchSize > 0 && index > 0 && index % batchSize == 0)
+					{
+						return new[] { command, "GO" };
+					}
+					else
+					{
+						return new[] {command};
+					}
+        	    });
+			}
             return Log.RecordTimeTaken("GetAllCommandsExecutableSql",
-                () => string.Join(Environment.NewLine, Commands.Select(x => x.ExecutableSql)));
+                () => string.Join(Environment.NewLine, commands));
         }
 
-        public void WriteExecutableSqlToFile(string path)
+		/// <param name="batchSize">Specifies how frequently a GO separator will be inserted between the commands</param>
+        public void WriteExecutableSqlToFile(string path, int batchSize = 0)
         {
-            string content = GetAllCommandsExecutableSql();
+            string content = GetAllCommandsExecutableSql(batchSize);
             File.WriteAllText(path, content);
         }
     }

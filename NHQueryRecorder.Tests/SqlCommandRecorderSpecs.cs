@@ -29,7 +29,7 @@ namespace NHQueryRecorder.Tests.SqlCommandRecorderSpecs
     {
         protected override void because()
         {
-			var things = ThingBuilder.BuildSequence(5).ToList();
+			var things = ThingBuilder.BuildSequence(200).ToList();
 			Record(session => things.ForEach(session.SaveOrUpdate));
         }
 
@@ -43,7 +43,7 @@ namespace NHQueryRecorder.Tests.SqlCommandRecorderSpecs
 		public void recorded_command_should_include_batch_inserts_logged_by_nhibernate()
 		{
 			var command = Recording.Commands.Single();
-			Assert.That(Regex.Matches(command.LoggedSql, "INSERT\\s+(INTO\\s+)?Thing").Count, Is.EqualTo(5));
+			Assert.That(Regex.Matches(command.LoggedSql, "INSERT\\s+(INTO\\s+)?Thing").Count, Is.EqualTo(200));
 		}
 
 		[Test]

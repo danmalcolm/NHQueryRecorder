@@ -43,11 +43,15 @@ namespace NHQueryRecorder
 		const string ParamPlaceholderRegexPattern = "@p(?<index>\\d+)";
 		private static readonly Regex ParamPlaceholderRegex = new Regex(ParamPlaceholderRegexPattern);
 
+		/// <summary>
+		/// Creates a string containing all commands logged
+		/// </summary>
+		/// <param name="loggedSql"></param>
+		/// <returns></returns>
         public string CreateExecutableSql(string loggedSql)
         {
             var loggedCommands = CommandSplitter.GetIndividualCommands(loggedSql);
-            var commands = (from message in loggedCommands
-                   select ConvertIndividualCommand(message)).ToArray();
+        	var commands = loggedCommands.Select(this.ConvertIndividualCommand);
             return string.Join(Environment.NewLine, commands);
         }
 

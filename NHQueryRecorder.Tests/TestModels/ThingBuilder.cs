@@ -18,7 +18,7 @@ namespace NHQueryRecorder.Tests.TestModels
 			       {
 			       	StringProperty = "Thing " + number,
 			       	BoolProperty = true,
-					DateProperty = new DateTime(2007, 7, number % 28, 7, 7, 7),
+					DateProperty = new DateTime(2007, 7, 1, 7, 7, 7).AddDays(number),
 			       	DecimalProperty = 0.77m + number,
 			       	IntProperty = number
 			       };
