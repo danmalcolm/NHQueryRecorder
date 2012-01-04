@@ -34,8 +34,8 @@ namespace NHQueryRecorder.Tests.TestModels
                     db.Dialect<MsSql2008Dialect>();
                     db.ConnectionStringName = "sqlexpress";
                     db.BatchSize = 100;
-					//db.LogFormattedSql = true;
-                    db.LogSqlInConsole = false;
+					db.LogFormattedSql = true;
+                    db.LogSqlInConsole = true;
                     db.Driver<Sql2008ClientDriver>();
                 }).AddProperties(new Dictionary<string, string> { { "generate_statistics", "true"} });
             new Mapping().ApplyTo(configuration);

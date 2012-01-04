@@ -8,7 +8,12 @@ namespace NHQueryRecorder.Tests
 	public abstract class PersistenceSpecification : ContextSpecification
 	{
 		private readonly ISessionFactory sessionFactory = TestConfigurationSource.SessionFactory;
-        
+
+		protected override void before_set_up_context()
+		{
+			//InNewSession(session => session.Delete());
+		}
+
 		protected void InNewSession(Action<ISession> action)
 		{
 			using (ISession session = sessionFactory.OpenSession())

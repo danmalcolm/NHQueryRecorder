@@ -40,13 +40,11 @@ namespace NHQueryRecorder.Tests.SqlCommandRecorderSpecs
         }
 
 		[Test]
-		public void recorded_command_should_include_batch_inserts_logged_by_nhibernate()
+		public void recorded_command_should_include_individual_inserts_from_batch_logged_by_nhibernate()
 		{
 			var command = Recording.Commands.Single();
 			Assert.That(Regex.Matches(command.LoggedSql, "INSERT\\s+(INTO\\s+)?Thing").Count, Is.EqualTo(5));
 		}
-
-		
     }
 
 	public class when_recording_single_insert : shared_context

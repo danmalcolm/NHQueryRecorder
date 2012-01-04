@@ -56,11 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandInfo.cs" />
-    <Compile Include="CommandSplitter.cs" />
     <Compile Include="LogSpy.cs" />
     <Compile Include="RecordedCommand.cs" />
     <Compile Include="Recording.cs" />
-    <Compile Include="RegexUtility.cs" />
     <Compile Include="LogMessageProcessor.cs" />
     <Compile Include="SqlCommandRecorder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

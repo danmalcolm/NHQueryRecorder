@@ -32,6 +32,24 @@ namespace NHQueryRecorder.Tests.TestModelPersistenceSpecs
 		}
 	}
 
+	public class when_persisting_multiple_instances : PersistenceSpecification
+	{
+		private Thing original;
+		private Thing retrieved;
+
+		protected override void because()
+		{
+			var items = ThingBuilder.BuildSequence(100).ToList();
+			InNewSession(session => items.ForEach(session.SaveOrUpdate));
+		}
+
+		[Test]
+		public void should_save_all_instances()
+		{
+			
+		}
+	}
+
 	public class when_updating_and_retrieving_single_instance : PersistenceSpecification
 	{
 		private Thing original;

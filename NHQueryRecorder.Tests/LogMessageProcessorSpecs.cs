@@ -113,6 +113,14 @@ command 0:UPDATE Thing SET StringProperty = @p0, BoolProperty = @p1, DatePropert
 			                            	@"select thing0_.TestModel1Id as TestModel1_0_, thing0_.StringProperty as StringPr2_0_, thing0_.BoolProperty as BoolProp3_0_, thing0_.DateProperty as DateProp4_0_, thing0_.IntProperty as IntPrope5_0_, thing0_.DecimalProperty as DecimalP6_0_ from Thing thing0_"
 			                            })
 				;
+
+			yield return CreateTestCase("Non Batched Insert Command",
+			                            @"INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES (@p0, @p1, @p2, @p3, @p4, @p5);@p0 = 'Thing 100' [Type: String (50)], @p1 = True [Type: Boolean (0)], @p2 = 10/04/2000 00:00:00 [Type: DateTime (0)], @p3 = 100 [Type: Int32 (0)], @p4 = 100.77 [Type: Decimal (0)], @p5 = bea35fd5-3848-4fcc-9fbc-9fce01568ef0 [Type: Guid (0)]",
+			                            new[]
+			                            {
+			                            	@"INSERT INTO Thing (StringProperty, BoolProperty, DateProperty, IntProperty, DecimalProperty, TestModel1Id) VALUES ('Thing 100', 1, '2000-04-10T00:00:00', 100, 100.77, 'bea35fd5-3848-4fcc-9fbc-9fce01568ef0');"
+			                            }
+				);
 		}
 
 		public ITestCaseData CreateTestCase(string name, string original, string[] expected)

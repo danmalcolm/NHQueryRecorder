@@ -74,8 +74,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandSplitterSpecs.cs" />
     <Compile Include="ContextSpecification.cs" />
+    <Compile Include="PerformanceSpecs.cs" />
     <Compile Include="PersistenceSpecification.cs" />
     <Compile Include="LogMessageProcessorSpecs.cs" />
     <Compile Include="SqlCommandRecorderSpecs.cs" />
