@@ -8,6 +8,7 @@ namespace NHQueryRecorder
         {
             LoggedSql = loggedSql;
         	ExecutableCommands = executableCommands;
+        	ExecutableSql = string.Join(Environment.NewLine, ExecutableCommands);
         }
 
         /// <summary>
@@ -16,15 +17,15 @@ namespace NHQueryRecorder
         public string LoggedSql { get; private set; }
 
 		/// <summary>
-		/// One or more commands
+		/// One or more commands contained within the SQL statements logged by NHibernate
 		/// </summary>
     	public string[] ExecutableCommands { get; private set; }
 
     	/// <summary>
-        /// The SQL statement with parameter values parsed from the originally logged statement and inserted into the 
-        /// original statement, suitable for executing against the database
-        /// </summary>
-		public string ExecutableSql { get { return string.Join(Environment.NewLine, ExecutableCommands); } }
+    	/// The SQL statement with parameter values parsed from the originally logged statement and inserted into the 
+    	/// original statement, suitable for executing against the database
+    	/// </summary>
+		public string ExecutableSql { get; private set; }
 
         public override string ToString()
         {

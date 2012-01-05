@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using log4net;
-using NHQueryRecorder.Utility;
 
 namespace NHQueryRecorder
 {
@@ -12,8 +10,6 @@ namespace NHQueryRecorder
     /// </summary>
     public class Recording
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof (Recording));
-
         public Recording(IEnumerable<RecordedCommand> commands)
         {
             Commands = commands.ToList().AsReadOnly();
@@ -23,8 +19,7 @@ namespace NHQueryRecorder
 
         public string GetAllCommandsExecutableSql()
         {
-            return Log.RecordTimeTaken("GetAllCommandsExecutableSql",
-                () => string.Join(Environment.NewLine, Commands.Select(x => x.ExecutableSql)));
+            return string.Join(Environment.NewLine, Commands.Select(x => x.ExecutableSql));
         }
 
         public void WriteExecutableSqlToFile(string path)

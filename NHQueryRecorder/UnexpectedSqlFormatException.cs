@@ -3,7 +3,7 @@
 namespace NHQueryRecorder
 {
 	/// <summary>
-	/// Exception thrown when a sql command string is not in a format expected by logic used to manipulate it
+	/// Exception thrown when a sql command logged by NHibernate is not in a format expected by logic used to process it
 	/// </summary>
 	public class UnexpectedSqlFormatException : Exception
 	{

@@ -7,7 +7,7 @@ using NHQueryRecorder.Utility;
 
 namespace NHQueryRecorder
 {
-    public class LogMessageProcessor
+    internal class LogMessageProcessor
     {
     	public RecordedCommand ProcessCommand(string loggedSql)
         {
@@ -20,29 +20,34 @@ namespace NHQueryRecorder
 			{
 				throw new UnexpectedSqlFormatException("Unable to parse logged command", loggedSql);
 			}
-        	var commandAndParamCaptures = match.Groups["commandAndParams"].Captures.ToArray();
-        	var commandTextCaptures = match.Groups["commandText"].Captures.ToArray();
-			var paramCaptures = match.Groups["param"].Captures.ToArray();
-			var paramIndexCaptures = match.Groups["paramIndex"].Captures.ToArray();
-			var paramValueCaptures = match.Groups["paramValue"].Captures.ToArray();
-			var paramTypeCaptures = match.Groups["paramType"].Captures.ToArray();
-			var paramLengthCaptures = match.Groups["paramLength"].Captures.ToArray();
+        	var commandAndParamsCaptures = match.Groups["commandAndParams"].Captures.ToArray();
+        	var commandTextCaptures = match.Groups["commandText"].Captures.ToQueue();
+			var paramCaptures = match.Groups["param"].Captures.ToQueue();
+			var paramIndexCaptures = match.Groups["paramIndex"].Captures.ToQueue();
+			var paramValueCaptures = match.Groups["paramValue"].Captures.ToQueue();
+			var paramTypeCaptures = match.Groups["paramType"].Captures.ToQueue();
+			var paramLengthCaptures = match.Groups["paramLength"].Captures.ToQueue();
 
-        	var executableCommands = (from commandAndParams in commandAndParamCaptures
-        	         let commandText = commandTextCaptures.SingleValueWithin(commandAndParams)
-        	         let parameterMap = (from p in paramCaptures.Within(commandAndParams)
-        	                             let raw = new
-        	                             {
-        	                             	Capture = p,
-        	                             	Index = Convert.ToInt32(paramIndexCaptures.SingleValueWithin(p)),
-        	                             	Value = paramValueCaptures.SingleValueWithin(p),
-        	                             	Type = paramTypeCaptures.SingleValueWithin(p),
-        	                             	Length = Convert.ToInt32(paramLengthCaptures.SingleValueWithin(p))
-        	                             }
-        	                             select new ParameterData(raw.Index, raw.Type, raw.Length, raw.Value)).ToDictionary
-        	         	(x => x.Index)
-        	         let executableCommand = CreateExecutableCommand(commandText, parameterMap)
-        	         select executableCommand).ToArray();
+			// Imperative loop over captures - doesn't feel right to use declarative linq style when we're mutating queues
+    		var executableCommands = new string[commandAndParamsCaptures.Length];
+			for (int commandIndex = 0; commandIndex < commandAndParamsCaptures.Length; commandIndex++)
+			{
+				var commandAndParamsCapture = commandAndParamsCaptures[commandIndex];
+				var commandText = commandTextCaptures.DequeueCaptureWithin(commandAndParamsCapture).Value;
+				var currentParamCaptures = paramCaptures.DequeueCapturesWithin(commandAndParamsCapture).ToArray();
+				var parameterInfos = new List<ParameterData>();
+				foreach (var param in currentParamCaptures)
+				{
+					int index = Convert.ToInt32(paramIndexCaptures.DequeueCaptureWithin(param).Value);
+					string type = paramTypeCaptures.DequeueCaptureWithin(param).Value;
+					int length = Convert.ToInt32(paramLengthCaptures.DequeueCaptureWithin(param).Value);
+					string value = paramValueCaptures.DequeueCaptureWithin(param).Value;
+					parameterInfos.Add(new ParameterData(index, type, length, value));
+				}
+
+				string executableCommand = CreateExecutableCommand(commandText, parameterInfos.ToDictionary(x => x.Index));
+				executableCommands[commandIndex] = executableCommand;
+			}
 			return new RecordedCommand(loggedSql, executableCommands);
         }
 

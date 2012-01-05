@@ -58,7 +58,7 @@ namespace NHQueryRecorder.Tests.PerformanceSpecs
 		}
 
 		[Test]
-        public void should_take_less_than_2000ms_to_parse_logged_commands()
+        public void should_take_less_than_1000ms_to_parse_logged_commands()
         {
 			Assert.That(timeTaken, Is.LessThan(1000));
 

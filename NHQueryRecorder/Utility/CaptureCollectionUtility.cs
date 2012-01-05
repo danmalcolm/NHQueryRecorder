@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace NHQueryRecorder.Utility
 {
-	public static class CaptureCollectionUtility
+	internal static class CaptureCollectionUtility
 	{
 		public static Capture[] ToArray(this CaptureCollection collection)
 		{
@@ -12,6 +13,30 @@ namespace NHQueryRecorder.Utility
 			collection.CopyTo(captures, 0);
 			return captures;
 		}
+
+		public static Queue<Capture> ToQueue(this CaptureCollection collection)
+		{
+			return new Queue<Capture>(collection.Cast<Capture>());
+		}
+
+		public static IEnumerable<Capture> DequeueCapturesWithin(this Queue<Capture> queue, Capture parent)
+		{
+			while (queue.Count > 0 && queue.Peek().OccursWithin(parent))
+			{
+				yield return queue.Dequeue();
+			}
+		}
+
+		public static Capture DequeueCaptureWithin(this Queue<Capture> queue, Capture parent)
+		{
+			if (!queue.Peek().OccursWithin(parent))
+			{
+				throw new InvalidOperationException(
+					"The next item in the queue does not occur within the text matched by the parent capture");
+			}
+			return queue.Dequeue();
+		}
+
 
 		public static bool OccursWithin(this Capture capture, Capture other)
 		{

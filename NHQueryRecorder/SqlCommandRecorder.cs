@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NHQueryRecorder
 {
@@ -23,11 +24,11 @@ namespace NHQueryRecorder
         public Recording GetRecording()
         {
             var processor = new LogMessageProcessor();
-            var commands = from e in spy.Appender.GetEvents()
+        	var recordedCommands = from e in spy.Appender.GetEvents()
                    let loggedSql = e.RenderedMessage
 				   let command = processor.ProcessCommand(loggedSql)
                    select command;
-            return new Recording(commands);
+			return new Recording(recordedCommands);
         }
 
         public void Dispose()

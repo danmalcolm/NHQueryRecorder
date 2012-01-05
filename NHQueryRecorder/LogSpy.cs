@@ -6,7 +6,7 @@ using log4net.Repository.Hierarchy;
 
 namespace NHQueryRecorder
 {
-	public class LogSpy : IDisposable
+	internal class LogSpy : IDisposable
 	{
 		private const string SqlLoggerName = "NHibernate.SQL";
 		private readonly MemoryAppender appender;
